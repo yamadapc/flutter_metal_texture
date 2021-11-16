@@ -15,11 +15,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const cupertinoThemeData = CupertinoThemeData();
-    var row = Row(children: const <Widget>[
-      Center(child: MyHomePage(title: 'Flutter Texture Demo Home')),
-      Center(child: MyHomePage(title: 'Flutter Texture Demo Home')),
-      Center(child: MyHomePage(title: 'Flutter Texture Demo Home')),
-    ]);
+    var row =
+        const Center(child: MyHomePage(title: 'Flutter Texture Demo Home'));
 
     return CupertinoApp(
         title: 'Flutter Texture Demo',

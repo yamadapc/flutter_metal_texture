@@ -30,5 +30,5 @@ fragment float4 fragmentShader(
   VertexInOut in [[stage_in]],
   const device Uniform& uniform [[buffer(1)]]
 ) {
-  return {tan(uniform.tick), sin(uniform.tick), cos(uniform.tick), 1.0};
+  return {tan(uniform.tick * in.position.x), sin(uniform.tick), cos(uniform.tick), 1.0};
 }

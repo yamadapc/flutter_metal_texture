@@ -152,13 +152,13 @@ class Texture: NSObject, FlutterTexture {
 
     // Bind vertices
     let vertices = [
-      Vertex(position: [1, 1, 0, 1], coord: [0, 1]),
-      Vertex(position: [1, 0, 0, 1], coord: [0, 0]),
-      Vertex(position: [1, 1, 0, 1], coord: [1, 1]),
-
-      Vertex(position: [-1, -1, 0, 1], coord: [1, 1]),
-      Vertex(position: [-1, 0, 0, 1], coord: [0, 0]),
+      Vertex(position: [-1, 1, 0, 1], coord: [0, 0]),
+      Vertex(position: [1, -1, 0, 1], coord: [1, 1]),
       Vertex(position: [1, 1, 0, 1], coord: [1, 0]),
+
+      Vertex(position: [-1, -1, 0, 1], coord: [0, 1]),
+      Vertex(position: [1, -1, 0, 1], coord: [1, 1]),
+      Vertex(position: [-1, 1, 0, 1], coord: [0, 0]),
     ]
     let vertexBuffer = metalDevice?.makeBuffer(
       bytes: vertices,
@@ -187,7 +187,7 @@ class Texture: NSObject, FlutterTexture {
 
     // Draw vertices
     renderEncoder?.drawPrimitives(
-      type: .triangleStrip,
+      type: .triangle,
       vertexStart: 0,
       vertexCount: 6
     )
