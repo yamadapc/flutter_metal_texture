@@ -8,7 +8,6 @@
 import Foundation
 import FlutterMacOS
 
-import OpenGL
 import CoreVideo
 import Metal
 import AppKit
