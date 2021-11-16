@@ -36,6 +36,11 @@ class Texture: NSObject, FlutterTexture {
   var commandQueue: MTLCommandQueue?
   var displayLink: CVDisplayLink?
 
+  var vertices: [Vertex]!
+  var vertexBuffer: MTLBuffer!
+  var uniform: [Uniform]!
+  var uniformBuffer: MTLBuffer!
+
   init(_ flutterTextureRegistry: FlutterTextureRegistry) {
     self.flutterTextureRegistry = flutterTextureRegistry
     super.init()
@@ -85,6 +90,27 @@ class Texture: NSObject, FlutterTexture {
     }
 
     metalTexture = CVMetalTextureGetTexture(metalCVTexture!)
+
+    self.vertices = [
+      Vertex(position: [-1, 1, 0, 1], coord: [0, 0]),
+      Vertex(position: [1, -1, 0, 1], coord: [1, 1]),
+      Vertex(position: [1, 1, 0, 1], coord: [1, 0]),
+
+      Vertex(position: [-1, -1, 0, 1], coord: [0, 1]),
+      Vertex(position: [1, -1, 0, 1], coord: [1, 1]),
+      Vertex(position: [-1, 1, 0, 1], coord: [0, 0]),
+    ]
+    self.vertexBuffer = metalDevice?.makeBuffer(
+      bytes: vertices,
+      length: MemoryLayout<Vertex>.stride * vertices.count,
+      options: MTLResourceOptions.storageModeManaged
+    )
+    self.uniform = [Uniform(tick: 0.0)]
+    self.uniformBuffer = metalDevice?.makeBuffer(
+      bytes: uniform,
+      length: MemoryLayout<Uniform>.stride * 1,
+      options: MTLResourceOptions.storageModeShared
+    )
 
     DispatchQueue.global(qos: .userInitiated).async {
       let renderPipelineDescriptor = MTLRenderPipelineDescriptor()
@@ -150,20 +176,6 @@ class Texture: NSObject, FlutterTexture {
     renderEncoder?.setRenderPipelineState(state)
 
     // Bind vertices
-    let vertices = [
-      Vertex(position: [-1, 1, 0, 1], coord: [0, 0]),
-      Vertex(position: [1, -1, 0, 1], coord: [1, 1]),
-      Vertex(position: [1, 1, 0, 1], coord: [1, 0]),
-
-      Vertex(position: [-1, -1, 0, 1], coord: [0, 1]),
-      Vertex(position: [1, -1, 0, 1], coord: [1, 1]),
-      Vertex(position: [-1, 1, 0, 1], coord: [0, 0]),
-    ]
-    let vertexBuffer = metalDevice?.makeBuffer(
-      bytes: vertices,
-      length: MemoryLayout<Vertex>.stride * vertices.count,
-      options: MTLResourceOptions.storageModeShared
-    )
     renderEncoder?.setVertexBuffer(
       vertexBuffer,
       offset: 0,
@@ -171,12 +183,10 @@ class Texture: NSObject, FlutterTexture {
     )
 
     // Bind uniform
-    self.tick += 0.1
-    var uniform = Uniform(tick: self.tick)
-    let uniformBuffer = metalDevice?.makeBuffer(
-      bytes: &uniform,
-      length: MemoryLayout<Uniform>.stride * 1,
-      options: MTLResourceOptions.storageModeShared
+    self.uniform[0].tick += 0.01
+    self.uniformBuffer.contents().copyMemory(
+      from: self.uniform,
+      byteCount: MemoryLayout<Uniform>.stride * 1
     )
     renderEncoder?.setFragmentBuffer(
       uniformBuffer,
