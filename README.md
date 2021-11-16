@@ -1,4 +1,5 @@
 # flutter_texture_example
+![](./screenshot.png)
 
 Demo metal texture rendering within flutter app
 
