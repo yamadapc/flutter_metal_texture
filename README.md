@@ -1,5 +1,7 @@
 # flutter_texture_example
 > Demo metal texture rendering within flutter app.
+>
+> _Note: the GIF is janky, but that's due to the GIF being a GIF_
 
 <p align="center">
   <img height="500" src="demo.gif" alt="Flutter Metal Texture Demo GIF"/>
