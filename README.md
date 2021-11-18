@@ -1,5 +1,5 @@
 # flutter_texture_example
-![](./screenshot.png)
+![](demo.gif)
 
 Demo metal texture rendering within flutter app.
 
@@ -24,3 +24,5 @@ increase.
 
 I'd imagine some CPU usage is caused by the Swift render loop I wrote & could be
 optimised a bit more.
+
+![](./screenshot.png)
