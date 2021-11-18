@@ -60,10 +60,12 @@ class _MyHomePageState extends State<MyHomePage> {
     if (tid == null) {
       return const Text("Loading...", style: TextStyle(color: Colors.white));
     } else {
-      return SizedBox(
-        child: Texture(textureId: tid),
-        width: 200,
-        height: 200,
+      return RepaintBoundary(
+        child: SizedBox(
+          child: Texture(textureId: tid),
+          width: 200,
+          height: 200,
+        ),
       );
     }
   }
