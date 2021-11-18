@@ -1,8 +1,8 @@
 # flutter_texture_example
 > Demo metal texture rendering within flutter app.
 
-<p style="text-align: center">
-  <img height="300" src="demo.gif" alt="Flutter Metal Texture Demo GIF"/>
+<p align="center">
+  <img height="500" src="demo.gif" alt="Flutter Metal Texture Demo GIF"/>
 </p>
 
 Flutter renders widgets, one of which is a `Texture` widget. It sends a message to
