@@ -15,8 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const cupertinoThemeData = CupertinoThemeData();
-    var row =
-        const Center(child: MyHomePage(title: 'Flutter Texture Demo Home'));
+    var row = const Center(child: TextureRenderer());
 
     return CupertinoApp(
         title: 'Flutter Texture Demo',
@@ -25,16 +24,14 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
+class TextureRenderer extends StatefulWidget {
+  const TextureRenderer({Key? key}) : super(key: key);
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<TextureRenderer> createState() => _TextureRendererState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _TextureRendererState extends State<TextureRenderer> {
   static const MethodChannel _channel = MethodChannel('opengl_texture');
   int? _textureId;
 
