@@ -1,7 +1,9 @@
 # flutter_texture_example
 > Demo metal texture rendering within flutter app.
 
-<img height="200" src="demo.gif" />
+<div style="text-align: center">
+  <img height="300" src="demo.gif" alt="Flutter Metal Texture Demo GIF"/>
+</div>
 
 Flutter renders widgets, one of which is a `Texture` widget. It sends a message to
 the Swift host, which creates a `CVPixelBuffer` linked to a metal `MTLTexture`.
