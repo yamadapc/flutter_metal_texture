@@ -1,11 +1,22 @@
 # flutter_texture_example
-![](demo.gif)
+> Demo metal texture rendering within flutter app.
 
-Demo metal texture rendering within flutter app.
+<img height="200" src="demo.gif" />
+
+Flutter renders widgets, one of which is a `Texture` widget. It sends a message to
+the Swift host, which creates a `CVPixelBuffer` linked to a metal `MTLTexture`.
+
+It then starts a render-loop, linked to the display refresh rate with `CVDisplayLink`
+and renders a quad with a mock increasing tick uniform.
+
+The idea is to benchmark and spike using flutter for widget rendering while having
+visuals rendered using a different strategy.
 
 Some parts were based on https://github.com/mogol/opengl_texture_widget_example
 
 ## CPU Usage
+Performance seems fine, but CPU usage is relatively high.
+
 Rendering `Texture(textureId: id)` linked to the display's frame-rate causes
 CPU usage to hover at around 16% on my computer to tick the render loop.
 
