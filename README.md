@@ -19,6 +19,10 @@ visuals rendered using a different strategy.
 Some parts were based on https://github.com/mogol/opengl_texture_widget_example
 
 ## CPU Usage
+> Not a proper measurement, just quick glancing at the activity monitor.
+> 
+> Flutter version: 2.8.0-3.1.pre
+
 Performance seems fine, but CPU usage is relatively high.
 
 Rendering `Texture(textureId: id)` linked to the display's frame-rate causes
